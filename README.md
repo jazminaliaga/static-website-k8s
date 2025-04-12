@@ -5,22 +5,22 @@ Este proyecto despliega una versión estática de un sitio web utilizando Miniku
 ---------------------------------------------------------------------------------------------------
 
 ## 🧱 Estructura del proyecto
-
+```
 devops-cloud-project/ ├── web-content/ # Contenido del sitio web
-                      │ └── index.html 
-                      │ └── style.css 
-					  │ └── assets/ 
-					  │ 	└── logo.png
-					  ├── k8s-manifests/ # Manifiestos de Kubernetes 
-					  │ └── deployments/
-					  │ 	└── deployment.yaml
-					  │ └── services/					  
-					  │ 	└── service.yaml 
-					  │ └── volumes/ 
-					  │ 	├── persistent-volume.yaml 
-					  │ 	└── persistent-volume-claim.yaml 
-					  └── README.md
-
+                      │ 	└── index.html 
+                      │ 	└── style.css 
+		      │ 	└── assets/ 
+		      │ 		└── logo.png
+		      └── k8s-manifests/ # Manifiestos de Kubernetes 
+                        	└── deployments/
+                         		└── deployment.yaml
+                        	└── services/					  
+                        		└── service.yaml 
+                        	└── volumes/ 
+                         		├── persistent-volume.yaml 
+                         		└── persistent-volume-claim.yaml 
+ 				└── README.md
+```
 ---------------------------------------------------------------------------------------------------
 
 ## 🧰 Requisitos
@@ -35,11 +35,12 @@ devops-cloud-project/ ├── web-content/ # Contenido del sitio web
 ## 🚀 Instrucciones para levantar el entorno
 
 ### 1. Clonar los repositorios
-git clone https://github.com/<jazminaliaga>/static-website.git web-content
-git clone https://github.com/<jazminaliaga>/devops-cloud-project.git
+git clone https://github.com/jazminaliaga/static-website.git web-content
+git clone https://github.com/jazminaliaga/devops-cloud-project.git
 
 ### 2. Iniciar Minikube y montar volumen local
 minikube start --mount --mount-string="$(pwd)/web-content:/mnt/web-content"
+cd devops-cloud-project
 
 ### 3. Crear PersistentVolume
 kubectl apply -f devops-cloud-project/k8s-manifests/volumes/persistent-volume.yaml
