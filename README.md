@@ -7,6 +7,7 @@ Este proyecto despliega una versión estática de un sitio web utilizando Miniku
 ## 🧱 Estructura del proyecto
 ```
 devops-cloud-project/   ├── web-content/ 				# Contenido del sitio web
+<<<<<<< HEAD
 						│ 	└── index.html 
 						│ 	└── style.css 
 						│ 	└── assets/ 
@@ -19,6 +20,7 @@ devops-cloud-project/   ├── web-content/ 				# Contenido del sitio web
 							└── volumes/ 
 								├── persistent-volume.yaml 
 								└── persistent-volume-claim.yaml
+							└── deploy.sh
 							└── README.md
 ```
 ---------------------------------------------------------------------------------------------------
@@ -40,12 +42,14 @@ devops-cloud-project/   ├── web-content/ 				# Contenido del sitio web
 Crear una carpeta llamada `devops-cloud-project`, una vez dentro abrir un bash git y clonar los siguientes repositorios: 
 ```
 git clone https://github.com/jazminaliaga/static-website.git web-content
+<<<<<<< HEAD
 git clone https://github.com/jazminaliaga/static-website-k8s.git
 ```
 ### 2. Iniciar Minikube y montar volumen local 🚜
 Parado en la carpeta `static-website`, abrir una terminal y ejecutar el siguinte comando:
 	
 |💡*Reemplazá `PATH_A_TU_PROYECTO` por la ruta completa a tu carpeta `devops-cloud-project`.*
+
 ```
 minikube start --mount --mount-string="PATH_A_TU_PROYECTO\devops-cloud-project\static-website:/mnt/web-content"
 
@@ -89,7 +93,6 @@ exit
 ```
 minikube service static-site-service
 ```
-
 ---------------------------------------------------------------------------------------------------
 ## ⚙️ Automatización del despliegue (opcional)
 
@@ -115,3 +118,4 @@ chmod +x deploy.sh
 ```
 3. Ejecutalo:
 💡 *El script creará todo automáticamente. No necesitás clonar los repos a mano. Asegurate de ejecutarlo desde un entorno compatible con Bash.*
+
