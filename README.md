@@ -7,7 +7,6 @@ Este proyecto despliega una versión estática de un sitio web utilizando Miniku
 ## 🧱 Estructura del proyecto
 ```
 devops-cloud-project/   ├── web-content/ 				# Contenido del sitio web
-<<<<<<< HEAD
 						│ 	└── index.html 
 						│ 	└── style.css 
 						│ 	└── assets/ 
@@ -42,7 +41,6 @@ devops-cloud-project/   ├── web-content/ 				# Contenido del sitio web
 Crear una carpeta llamada `devops-cloud-project`, una vez dentro abrir un bash git y clonar los siguientes repositorios: 
 ```
 git clone https://github.com/jazminaliaga/static-website.git web-content
-<<<<<<< HEAD
 git clone https://github.com/jazminaliaga/static-website-k8s.git
 ```
 ### 2. Iniciar Minikube y montar volumen local 🚜
