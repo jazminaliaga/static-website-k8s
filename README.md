@@ -7,20 +7,20 @@ Este proyecto despliega una versión estática de un sitio web utilizando Miniku
 ## 🧱 Estructura del proyecto
 ```
 devops-cloud-project/   ├── web-content/ 				# Contenido del sitio web
-						│ 	└── index.html 
-						│ 	└── style.css 
-						│ 	└── assets/ 
-						│ 		└── logo.png
-						└── k8s-manifests/ 				# Manifiestos de Kubernetes 
-							└── deployments/
-								└── deployment.yaml
-							└── services/					  
-								└── service.yaml 
-							└── volumes/ 
-								├── persistent-volume.yaml 
-								└── persistent-volume-claim.yaml
-							└── deploy.sh
-							└── README.md
+			│ 	└── index.html 
+			│ 	└── style.css 
+			│ 	└── assets/ 
+			│ 		└── logo.png
+			└── k8s-manifests/ 				# Manifiestos de Kubernetes 
+				└── deployments/
+					└── deployment.yaml
+				└── services/					  
+					└── service.yaml 
+				└── volumes/ 
+					├── persistent-volume.yaml 
+					└── persistent-volume-claim.yaml
+				└── deploy.sh
+				└── README.md
 ```
 ---------------------------------------------------------------------------------------------------
 
