@@ -35,6 +35,7 @@ if [ ! -d "$BASE_DIR/web-content" ]; then
 else
   echo "📂 Repositorio web ya clonado, omitiendo..."
 fi
+
 if [ ! -d "$BASE_DIR/static-website-k8s" ]; then
   git clone "$REPO_K8S" static-website-k8s
 else
@@ -43,13 +44,25 @@ fi
 
 # 4. Iniciar Minikube con volumen montado
 echo "🚜 Iniciando Minikube..."
-echo "📂 Montando la carpeta 'web-content' como volumen persistente..."
-minikube start -p static-site --mount --mount-string="$BASE_DIR/web-content:$MOUNT_PATH"
+minikube start -p static-site --mount --mount-string="$BASE_DIR/web-content:/mnt/web-content"
+
+# 5. Verificar que el contexto esté listo antes de usar kubectl
 if kubectl config get-contexts | grep -q "static-site"; then
   kubectl config use-context static-site
 fi
 
-# 5. Aplicar manifiestos de Kubernetes
+echo "⏳ Esperando que el API server esté disponible..."
+until kubectl get nodes &>/dev/null; do
+  sleep 2
+done
+
+# 6. Limpieza de errores previos (si existen)
+kubectl delete deployment static-site --ignore-not-found
+kubectl delete service static-site-service --ignore-not-found
+kubectl delete pvc static-site-pvc --ignore-not-found
+kubectl delete pv static-site-pv --ignore-not-found
+
+# 7. Aplicar manifiestos de Kubernetes
 echo "📦 Creando PersistentVolume..."
 kubectl apply -f "$BASE_DIR/static-website-k8s/volumes/persistent-volume.yaml"
 
@@ -62,7 +75,7 @@ kubectl apply -f "$BASE_DIR/static-website-k8s/deployments/deployment.yaml"
 echo "🌐 Creando Service..."
 kubectl apply -f "$BASE_DIR/static-website-k8s/services/service.yaml"
 
-# 6. Verificaciones básicas
+# 8. Verificaciones básicas
 echo "🔍 Esperando que los pods estén activos..."
 kubectl wait --for=condition=ready pod -l app=static-site --timeout=60s
 
@@ -72,12 +85,10 @@ kubectl get pods
 echo "✅ Estado de PV y PVC:"
 kubectl get pv,pvc
 
-# 7. Mostrar archivos montados dentro del pod
+# 9. Mostrar archivos montados dentro del pod
 echo "🧪 Verificando archivos montados..."
 kubectl exec -it "$(kubectl get pod -l app=static-site -o jsonpath="{.items[0].metadata.name}")" -- ls /usr/share/nginx/html
 
-# 8. Abrir el sitio web
+# 10. Abrir el sitio web
 echo "🌍 Accediendo al sitio desplegado..."
-minikube service static-site-service
-URL=$(minikube service static-site-service --url)
-echo "🔗 Si no se abrió automáticamente, accedé manualmente al sitio en: $URL"
+minikube service static-site-service -p static-site
