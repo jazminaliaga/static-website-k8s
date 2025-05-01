@@ -117,5 +117,8 @@ Este repositorio incluye un script llamado `deploy.sh` que permite **automatizar
 chmod +x deploy.sh
 ```
 3. Ejecutalo:
+```
+./deploy.sh
+```
 💡 *El script creará todo automáticamente. No necesitás clonar los repos a mano. Asegurate de ejecutarlo desde un entorno compatible con Bash.*
 
